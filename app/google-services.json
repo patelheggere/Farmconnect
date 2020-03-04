@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "448792653495",
+    "firebase_url": "https://farmconnect-5f00b.firebaseio.com",
+    "project_id": "farmconnect-5f00b",
+    "storage_bucket": "farmconnect-5f00b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:448792653495:android:8b9307a989eb268f0c6732",
+        "android_client_info": {
+          "package_name": "com.patelheggere.farmconnect"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "448792653495-hqck1u615vrb5ect48miocgarj3ug75l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.patelheggere.farmconnect",
+            "certificate_hash": "31f193b39e94e6b1d609010f4fe9be4db314c4a9"
+          }
+        },
+        {
+          "client_id": "448792653495-l52fgt6qhmp8sal0c6r8q1ijb5anvd6n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxgGtTERR8pbbIj4vMMqqy89FJIeFJUds"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "448792653495-l52fgt6qhmp8sal0c6r8q1ijb5anvd6n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

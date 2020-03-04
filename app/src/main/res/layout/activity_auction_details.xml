@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.merchantmain.ui.liveauction.AuctionDetailsActivity">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="4dp">
+    <ImageView
+        android:id="@+id/crop_image"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_launcher_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="8dp"
+        android:weightSum="5">
+        <TextView
+            android:id="@+id/expirytimelabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/expiry_time"
+            android:layout_weight="1.5"/>
+        <TextView
+            android:id="@+id/expirytime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:text="dfsdfsd"
+            android:layout_weight="3.5"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="8dp"
+        android:weightSum="5">
+        <TextView
+            android:id="@+id/minbidlabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/minbid"
+            android:layout_weight="1.5"/>
+        <TextView
+            android:id="@+id/minbid"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:text="@string/minbid"
+            android:layout_weight="3.5"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="8dp"
+        android:weightSum="5">
+        <TextView
+            android:id="@+id/curentbidLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/current_bid"
+            android:layout_weight="1.5"/>
+        <TextView
+            android:id="@+id/curentbid"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:text="dfsdfsd"
+            android:layout_weight="3.5"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="8dp"
+        android:weightSum="5">
+        <TextView
+            android:id="@+id/locationLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/location"
+            android:layout_weight="1.5"/>
+        <TextView
+            android:id="@+id/location"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:text="dfsdfsd"
+            android:layout_weight="3.5"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="8dp"
+        android:weightSum="5">
+        <TextView
+            android:id="@+id/YourBidLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/Enter_your_bid"
+            android:layout_weight="1.5"/>
+        <EditText
+            android:id="@+id/merchant_bid_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/Enter_your_bid"
+            android:inputType="number"
+            android:maxLines="1"
+            android:layout_weight="3.5"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button_bid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:text="@string/bid_now"/>
+</LinearLayout>
+</ScrollView>

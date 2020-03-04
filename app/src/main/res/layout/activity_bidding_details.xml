@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/feed_item_margin"
+            android:layout_marginTop="@dimen/feed_item_margin"
+            android:layout_marginRight="@dimen/feed_item_margin"
+            android:background="@drawable/bg_parent_rounded_corner"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/feed_item_padding_top_bottom">
+            <!--
+            needs to add this above layout
+            android:paddingBottom="@dimen/feed_item_padding_top_bottom"-->
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/feed_item_padding_left_right"
+                android:paddingRight="@dimen/feed_item_padding_left_right"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/profilePic"
+                    android:layout_width="@dimen/feed_item_profile_pic"
+                    android:layout_height="@dimen/feed_item_profile_pic"
+                    android:scaleType="fitCenter"
+                    android:src="@mipmap/ic_launcher" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/feed_item_profile_info_padd">
+
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:textSize="@dimen/feed_item_profile_name"
+                        android:textStyle="bold"
+                        tools:text="Name" />
+
+                    <TextView
+                        android:id="@+id/timestamp"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/timestamp"
+                        android:textSize="@dimen/feed_item_timestamp"
+                        tools:text="Text" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="4">
+
+                <TextView
+                    android:id="@+id/textViewHarvestingTime"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:paddingLeft="@dimen/feed_item_status_pad_left_right"
+                    android:paddingTop="@dimen/feed_item_status_pad_top"
+                    android:text="@string/harvesting_time" />
+
+                <TextView
+                    android:id="@+id/textViewHarvestingTimeValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.5"
+                    android:paddingTop="@dimen/feed_item_status_pad_top"
+                    android:paddingBottom="5dp"
+                    android:textColor="@color/black"
+                    tools:text="3" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="4">
+
+                <TextView
+                    android:id="@+id/textViewNofOfBids"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:paddingLeft="@dimen/feed_item_status_pad_left_right"
+                    android:text="@string/noofbids" />
+
+                <TextView
+                    android:id="@+id/noofbids"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.5"
+                    android:paddingRight="@dimen/feed_item_status_pad_left_right"
+                    android:paddingBottom="5dp"
+                    android:textColor="@color/black"
+                    tools:text="3" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="4">
+
+                <TextView
+                    android:id="@+id/textViewQty"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:paddingLeft="@dimen/feed_item_status_pad_left_right"
+                    android:text="@string/qty" />
+
+                <TextView
+                    android:id="@+id/qtyValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.5"
+                    android:autoLink="web"
+                    android:linksClickable="true"
+                    android:paddingRight="@dimen/feed_item_status_pad_left_right"
+                    android:paddingBottom="8dp"
+                    android:textColor="@color/black"
+                    android:textColorLink="@color/link"
+                    android:visibility="visible"
+                    tools:text="200Kg" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                android:weightSum="4">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:paddingLeft="@dimen/feed_item_status_pad_left_right"
+                    android:text="@string/bidder_price" />
+
+                <TextView
+                    android:id="@+id/bidderPrice"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.5"
+                    android:autoLink="web"
+                    android:linksClickable="true"
+                    android:paddingRight="@dimen/feed_item_status_pad_left_right"
+                    android:paddingBottom="8dp"
+                    android:text="Rs.5000"
+                    android:textColor="@color/black"
+                    android:textColorLink="@color/link"
+                    android:visibility="visible" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="4">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:paddingLeft="@dimen/feed_item_status_pad_left_right"
+                    android:text="@string/your_price" />
+
+                <TextView
+                    android:id="@+id/textViewYourValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.5"
+                    android:autoLink="web"
+                    android:linksClickable="true"
+                    android:paddingRight="@dimen/feed_item_status_pad_left_right"
+                    android:paddingBottom="8dp"
+                    android:text="Rs.6000"
+                    android:textColor="@color/black"
+                    android:textColorLink="@color/link"
+                    android:visibility="visible" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:weightSum="4">
+
+                <TextView
+                    android:id="@+id/textViewStatus"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:paddingLeft="@dimen/feed_item_status_pad_left_right"
+                    android:text="@string/status" />
+
+                <TextView
+                    android:id="@+id/txtStatus"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.5"
+                    android:autoLink="web"
+                    android:linksClickable="true"
+                    android:textColor="@color/black"
+                    android:textColorLink="@color/link"
+                    android:visibility="visible"
+                    tools:text="status" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:weightSum="4">
+
+                <TextView
+                    android:id="@+id/textViewSuccess"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:paddingLeft="@dimen/feed_item_status_pad_left_right"
+                    android:text="@string/bid_success" />
+
+                <TextView
+                    android:id="@+id/txtStatusSuccessbid"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.5"
+                    android:autoLink="web"
+                    android:linksClickable="true"
+                    android:textColor="@color/black"
+                    android:textColorLink="@color/link"
+                    android:visibility="visible"
+                    tools:text="status" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/linearLayoutPlace"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/event_place"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="8dp"
+                    android:paddingLeft="8dp"
+                    android:text="@string/event_place" />
+
+                <TextView
+                    android:id="@+id/event_place_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="8dp"
+                    android:paddingLeft="8dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/cropImage1"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@color/white"
+                android:scaleType="centerCrop"
+                android:visibility="visible" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/viewDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autoLink="web"
+                    android:linksClickable="true"
+                    android:paddingLeft="@dimen/feed_item_status_pad_left_right"
+                    android:paddingRight="@dimen/feed_item_status_pad_left_right"
+                    android:text="Click here to View complete Details"
+                    android:textColorLink="@color/link"
+                    android:visibility="visible" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="25dp"
+                    android:weightSum="1"></LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="0.42"
+                    android:orientation="horizontal"
+                    android:paddingLeft="70dp"></LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/feed_bg" />
+
+            <LinearLayout
+                android:id="@+id/linearlayoutLikesCommentShare"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="2dp"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                android:weightSum="3">
+
+                <LinearLayout
+                    android:id="@+id/linearlayoutLike"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp" />
+
+                    <TextView
+                        android:id="@+id/textViewLikeCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
+                        tools:text="3" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearlayoutComment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp" />
+
+                    <TextView
+                        android:id="@+id/textViewCommentCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
+                        tools:text="3" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearlayoutShare"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp" />
+
+                    <TextView
+                        android:id="@+id/textViewShareCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
+                        tools:text="3" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
