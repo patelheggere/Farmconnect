@@ -51,7 +51,7 @@ import com.google.gson.Gson;
 import com.patelheggere.farmconnect.R;
 import com.patelheggere.farmconnect.activity.languegae.LanguageActivity;
 import com.patelheggere.farmconnect.activity.merchantmain.ui.dashboard.DashboardFragment;
-import com.patelheggere.farmconnect.activity.merchantmain.ui.notifications.NotificationsFragment;
+import com.patelheggere.farmconnect.activity.merchantmain.ui.notifications.MerchantNotificationsFragment;
 import com.patelheggere.farmconnect.activity.merchantmain.ui.liveauction.LiveAuctionFragment;
 import com.patelheggere.farmconnect.model.APIResponseModel;
 import com.patelheggere.farmconnect.model.notify.Data;
@@ -256,7 +256,7 @@ public class MerchantMainActivity extends AppCompatActivity implements Navigatio
                     }
                     Fragment fragment = fragmentManager.findFragmentByTag("NEWS");
                     if (fragment == null) {
-                        fragment = new NotificationsFragment();
+                        fragment = new MerchantNotificationsFragment();
                         fragmentTransaction.add(R.id.nav_host_fragment_bottom, fragment, "NEWS");
                     } else {
                         fragmentTransaction.attach(fragment);

@@ -6,6 +6,8 @@ import com.patelheggere.farmconnect.activity.merchantmain.ui.liveauction.model.L
 import com.patelheggere.farmconnect.model.APIResponseModel;
 import com.patelheggere.farmconnect.model.AssemblyModel;
 import com.patelheggere.farmconnect.model.DistrictModel;
+import com.patelheggere.farmconnect.model.FarmerAndCropDetails;
+import com.patelheggere.farmconnect.model.FarmerBidNotificationModel;
 import com.patelheggere.farmconnect.model.FarmerCropModel;
 import com.patelheggere.farmconnect.model.FilterModel;
 import com.patelheggere.farmconnect.model.PostBidModel;
@@ -125,5 +127,19 @@ public interface ApiInterface {
     Call<APIResponseModel> PostBidd(@Body PostBidModel postBidModel);
 
 
+    @POST("NotifyMerchantFarmerAccept.php")
+    Call<APIResponseModel> NotifyMerchant(@Body FarmerBidNotificationModel farmerBidNotificationModel);
 
+    @GET("GetAllNotifications.php")
+    Call<List<FarmerBidNotificationModel>> getAllFarmerNotifications(@Query("userid") String userid);
+
+    @GET("GetAllMerchantNotifications.php")
+    Call<List<FarmerBidNotificationModel>> getAllMerchantNotifications(@Query("userid") String userid);
+
+    @GET("GetFarmerAndCropDetails.php")
+    Call<FarmerAndCropDetails> GetFarmerAndCropDetails(@Query("userid") String userid, @Query("cropId") int cropId);
+
+
+    @POST("updateMerchantPayment.php")
+    Call<APIResponseModel> updateMerchantPayment(@Body FarmerBidNotificationModel farmerBidNotificationModel);
 }

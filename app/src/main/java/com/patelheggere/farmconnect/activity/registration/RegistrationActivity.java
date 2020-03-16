@@ -1294,7 +1294,8 @@ public class RegistrationActivity extends BaseActivity {
         userDetails.setMobile(textInputEditTextPhone.getText().toString().trim());
         userDetails.setName(textInputEditTextName.getText().toString().trim());
         userDetails.setPwd(textInputEditTextPwd.getText().toString().trim());
-        if(SharedPrefsHelper.getInstance().get(AVATAR).toString()!=null || !SharedPrefsHelper.getInstance().get(AVATAR).toString().isEmpty())
+        Log.d(TAG, "callNetworkAPI: "+SharedPrefsHelper.getInstance().get(AVATAR));
+        if(SharedPrefsHelper.getInstance().get(AVATAR)!=null )
         {
             userDetails.setAvatar(SharedPrefsHelper.getInstance().get(AVATAR).toString());
         }

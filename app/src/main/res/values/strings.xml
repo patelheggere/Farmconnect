@@ -179,5 +179,13 @@
     <string name="search">Search</string>
     <string name="filter">Filter</string>
     <string name="Rs">\u20B9</string>
+    <string name="reject">Reject</string>
+    <string name="accept">Accept</string>
+    <string name="continue_for_payment">Get Details</string>
+    <string name="direction">Direction</string>
+    <string name="crop_location">Location</string>
+    <string name="crop_dist">District</string>
+    <string name="crop_details"><u>Crop Details</u></string>
+    <string name="farmer_details"><u>Farmer Details</u></string>
 
 </resources>

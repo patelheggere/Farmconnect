@@ -36,7 +36,7 @@ import retrofit2.Response;
 import static com.patelheggere.farmconnect.utils.AppUtils.Constants.USER_ID;
 
 public class HomeFragment extends BaseFragment {
-    private static final String TAG = "NotificationsFragment";
+    private static final String TAG = "MerchantNotificationsFragment";
 
     private HomeViewModel homeViewModel;
     private RecyclerView mRecyclerView;
@@ -51,12 +51,12 @@ public class HomeFragment extends BaseFragment {
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home_farmer, container, false);
-        homeViewModel.getText().observe(this, new Observer<String>() {
+      /*  homeViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                // textView.setText(s);
             }
-        });
+        });*/
         mRecyclerView = root.findViewById(R.id.recyclerView);
         mProgressBar = root.findViewById(R.id.progress_bar);
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
