@@ -104,16 +104,15 @@ public class LiveAuctionFragment extends BaseFragment implements
         mCropSpinner = mRootView.findViewById(R.id.spinnerCrop);
         mDistSpinner = mRootView.findViewById(R.id.spinnerDist);
         mButtonSearch = mRootView.findViewById(R.id.search);
+        no_data = mRootView.findViewById(R.id.no_data);
     }
 
-    final String[] stateList = {
+    String[] stateList = {
             "Select State", "Karnataka", "Kerala", "Maharashtra", "TamilNadu",
             "Goa", "AndhraPradesh"};
     private void initListeners() {
 
-
-
-
+        stateFilterList = new ArrayList<>();
         for (int i = 0; i < stateList.length; i++) {
             FilterCheckBoxModel stateVO = new FilterCheckBoxModel();
             stateVO.setTitle(stateList[i]);
@@ -124,20 +123,23 @@ public class LiveAuctionFragment extends BaseFragment implements
         mStateSpinner.setAdapter(myAdapter);
 
 
-        cropNamesList = new ArrayList<>();
-        cropNamesList.add("Select Crop");
-        cropNamesList.add("Onion");
-        cropNamesList.add("Groundnut");
-        cropNamesList.add("Tomato");
-        cropNamesList.add("Brinjal");
-        cropNamesList.add("Bitter Guard");
+        if(cropNamesList==null) {
+            cropNamesList = new ArrayList<>();
+            cropNamesList.add("Select Crop");
+            cropNamesList.add("Onion");
+            cropNamesList.add("Groundnut");
+            cropNamesList.add("Tomato");
+            cropNamesList.add("Brinjal");
+            cropNamesList.add("Bitter Guard");
 
-        for (int i = 0; i < cropNamesList.size(); i++) {
-            FilterCheckBoxModel stateVO = new FilterCheckBoxModel();
-            stateVO.setTitle(cropNamesList.get(i));
-            stateVO.setSelected(false);
-            cropFilterList.add(stateVO);
+            for (int i = 0; i < cropNamesList.size(); i++) {
+                FilterCheckBoxModel stateVO = new FilterCheckBoxModel();
+                stateVO.setTitle(cropNamesList.get(i));
+                stateVO.setSelected(false);
+                cropFilterList.add(stateVO);
+            }
         }
+
 
         SpinnerCheckboxCropAdapter cropFilterAdapter = new SpinnerCheckboxCropAdapter(mActivity, 0, cropFilterList, this);
         mCropSpinner.setAdapter(cropFilterAdapter);
@@ -175,6 +177,7 @@ public class LiveAuctionFragment extends BaseFragment implements
                 if(response.isSuccessful()){
                     districtModelList = response.body();
                     mDistrictNamesList = new ArrayList<>();
+                    distFilterList = new ArrayList<>();
                     mDistrictNamesList.add(getString(R.string.Select_District));
                     for (int i = 0; i<districtModelList.size(); i++){
                         mDistrictNamesList.add(districtModelList.get(i).getDist_name());
@@ -224,8 +227,10 @@ public class LiveAuctionFragment extends BaseFragment implements
                     mRecyclerView.setAdapter(adapter);
                     //   mProgressBar.setVisibility(View.GONE);
                     mRecyclerView.setVisibility(View.VISIBLE);
+                    no_data.setVisibility(View.GONE);
                 }
                 else {
+                    no_data.setVisibility(View.VISIBLE);
                     AppUtils.showToast(getString(R.string.no_data));
                 }
             }

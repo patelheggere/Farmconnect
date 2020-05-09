@@ -1,6 +1,6 @@
 <resources>
 
-    <string name="app_name">Farmconnect</string>
+    <string name="app_name">Agri On</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
@@ -157,6 +157,7 @@
     <string name="live_auction">Live Auction</string>
     <string name="crop_name">Crop Name</string>
     <string name="quantity">Quantity</string>
+    <string name="min_quantity">Minimum Quantity</string>
     <string name="harvesting_date">Estimated Harvesting Date</string>
     <string name="bid_success">Bid Success</string>
     <string name="dist_cnt_emty">Please select district</string>
@@ -187,5 +188,10 @@
     <string name="crop_dist">District</string>
     <string name="crop_details"><u>Crop Details</u></string>
     <string name="farmer_details"><u>Farmer Details</u></string>
+    <string name="farmer_price">Farmer Price:</string>
+    <string name="dont_have_crop">Don\'t have active crops in list, Please add by tapping on plus con</string>
+    <string name="_no_crops_in_live_auction">No crops available for Live Auction please wait we will get you soon.</string>
+    <string name="minimum_order">Minimum Order</string>
+    <string name="minimum_order_should_be_order">Minimum Order should be ordered</string>
 
 </resources>

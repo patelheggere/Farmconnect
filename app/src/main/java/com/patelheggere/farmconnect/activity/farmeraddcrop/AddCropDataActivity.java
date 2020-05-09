@@ -31,12 +31,15 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -104,8 +107,9 @@ public class AddCropDataActivity extends BaseActivity {
     private static final int AUDIO_LOCAL = 1700;
     private ImageView circleImageView;
     private String mMoobile;
-    private TextInputEditText inputEditTextCropName, inputEditText, inputEditTextHarvestTime, inputEditTextQuantity, inputEditTextMinimumBid;
+    private TextInputEditText inputEditTextCropName, inputEditText, inputEditTextHarvestTime, inputEditTextQuantity, inputEditTextMinimumBid, inputEditTextMinimumOrder;
     private TextInputEditText inputEditTextCropLocation;
+    private TextInputLayout mTextInputLayoutMinimumOrder;
     private int year, month, day;
     private Calendar calendar;
     private long harvestTimeInLong;
@@ -125,6 +129,9 @@ public class AddCropDataActivity extends BaseActivity {
     private DatabaseReference databaseReferenceCropNames;
     private List<CropNameModel> cropNameWithIconList;
     private String cropIconImage;
+    private RadioGroup mRadioGroupMinimumOrder;
+    protected RadioButton mRadioButtonMinimumYes, mRadioButtonMinimumNo;
+    private int isMinimumOrder=0;
 
     @Override
     protected int getContentView() {
@@ -141,12 +148,18 @@ public class AddCropDataActivity extends BaseActivity {
         inputEditTextQuantity = findViewById(R.id.et_quantity);
         inputEditTextMinimumBid = findViewById(R.id.et_minbid);
         inputEditTextCropLocation = findViewById(R.id.et_location);
+        inputEditTextMinimumOrder = findViewById(R.id.et_min_quantity);
+        mTextInputLayoutMinimumOrder = findViewById(R.id.til_minimum_quantity);
+        mRadioGroupMinimumOrder = findViewById(R.id.radiogroup_min_order);
+        mRadioButtonMinimumYes = findViewById(R.id.radioMinimumYes);
+        mRadioButtonMinimumNo = findViewById(R.id.radioMinimumNo);
 
         spinnerState = findViewById(R.id.sp_state);
         spinnerDist = findViewById(R.id.sp_district);
         spinnerTaluk = findViewById(R.id.sp_taluk);
         spinnerHobli = findViewById(R.id.sp_hobli);
         mSpinnerCropName = findViewById(R.id.sp_crop_name);
+        mTextInputLayoutMinimumOrder.setVisibility(View.GONE);
     }
 
     @Override
@@ -207,6 +220,21 @@ public class AddCropDataActivity extends BaseActivity {
                     }
                 }, year, month, day);
                 datePickerDialog.show();
+            }
+        });
+
+        mRadioGroupMinimumOrder.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                if(i==R.id.radioMinimumYes)
+                {
+                    isMinimumOrder = 1;
+                    mTextInputLayoutMinimumOrder.setVisibility(View.VISIBLE);
+                }
+                else {
+                    isMinimumOrder = 0;
+                    mTextInputLayoutMinimumOrder.setVisibility(View.GONE);
+                }
             }
         });
 
@@ -411,11 +439,12 @@ public class AddCropDataActivity extends BaseActivity {
         farmerCropModel.setDistrict(dist);
         farmerCropModel.setTaluk(taluk);
         farmerCropModel.setVillage(village);
-
+        farmerCropModel.setIsMinimumOrder(isMinimumOrder);
         farmerCropModel.setStateId(statId);
         farmerCropModel.setDistrictId(distId);
         farmerCropModel.setTalukId(talukId);
         farmerCropModel.setVillageId(villageId);
+        farmerCropModel.setMinimumOrder(Long.parseLong(inputEditTextMinimumOrder.getText().toString()));
 
 
         Call<APIResponseModel> cropModelCall = apiInterface.addCropDetails(farmerCropModel);

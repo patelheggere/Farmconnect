@@ -60,9 +60,9 @@ public class FarmerCropAdapter extends RecyclerView.Adapter<FarmerCropAdapter.My
     public class MyViewHolder extends RecyclerView.ViewHolder {
         private TextView time, cropName, bidsCount, qty, status, harvestingTime, bidderPrice, farmerPrice;
         private ImageView imageView;
-        private TextView bidSuccess;
+        private TextView bidSuccess, mTextViewFrmerPrice, mTextViewBidderPriceLabel;
         private ImageView circleImageViewProfile;
-        private LinearLayout mShareCommentLayout;
+        private LinearLayout mShareCommentLayout, mLinearLayoutBidderPrice;
         private LinearLayout mLinearLayoutLike, mLinearLayoutComment, mLinearLayoutShare, mLinearLayoutPlace;
         private TextView mTextViewLikeCount, mTextViewShareCount, mTextViewCommentCount, textViewPlace;
 
@@ -80,6 +80,9 @@ public class FarmerCropAdapter extends RecyclerView.Adapter<FarmerCropAdapter.My
             bidderPrice = view.findViewById(R.id.bidderPrice);
             farmerPrice = view.findViewById(R.id.textViewYourValue);
             bidSuccess = view.findViewById(R.id.txtStatusSuccessbid);
+            mTextViewFrmerPrice = view.findViewById(R.id.mTextViewFarmerPrice);
+            mTextViewBidderPriceLabel = view.findViewById(R.id.textViewBidderPrice);
+
 
             mShareCommentLayout = view.findViewById(R.id.linearlayoutLikesCommentShare);
             mLinearLayoutComment = view.findViewById(R.id.linearlayoutComment);
@@ -89,6 +92,10 @@ public class FarmerCropAdapter extends RecyclerView.Adapter<FarmerCropAdapter.My
             mTextViewShareCount = view.findViewById(R.id.textViewShareCount);
             mTextViewCommentCount = view.findViewById(R.id.textViewCommentCount);
             mLinearLayoutPlace = view.findViewById(R.id.linearLayoutPlace);
+
+            mLinearLayoutBidderPrice = view.findViewById(R.id.bidderPriceLyt);
+            mLinearLayoutBidderPrice.setVisibility(View.VISIBLE);
+
         }
     }
     
@@ -123,8 +130,13 @@ public class FarmerCropAdapter extends RecyclerView.Adapter<FarmerCropAdapter.My
             holder.status.setText(dataModel.getStatus());
 
             holder.bidderPrice.setText(context.getString(R.string.Rs)+dataModel.getBidderPrice());
+            holder.mLinearLayoutBidderPrice.setVisibility(View.VISIBLE);
+            holder.mTextViewFrmerPrice.setText(context.getString(R.string.farmer_price));
+
 
             holder.farmerPrice.setText(context.getString(R.string.Rs)+dataModel.getFarmerPrice()+"");
+
+            holder.mTextViewBidderPriceLabel.setText(context.getString(R.string.your_price));
 
             if(dataModel.isBidSuccess()==1) {
                 holder.bidSuccess.setText("Success");

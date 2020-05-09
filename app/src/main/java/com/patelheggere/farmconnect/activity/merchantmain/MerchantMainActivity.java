@@ -264,7 +264,7 @@ public class MerchantMainActivity extends AppCompatActivity implements Navigatio
                     fragmentTransaction.setPrimaryNavigationFragment(fragment);
                     fragmentTransaction.setReorderingAllowed(true);
                     fragmentTransaction.commitNowAllowingStateLoss();
-                    setupToolBar(getString(R.string.title_home));
+                    setupToolBar(getString(R.string.title_notifications));
 
 
                     return true;
@@ -319,7 +319,7 @@ public class MerchantMainActivity extends AppCompatActivity implements Navigatio
                     fragmentTransaction.setPrimaryNavigationFragment(fragment);
                     fragmentTransaction.setReorderingAllowed(true);
                     fragmentTransaction.commitNowAllowingStateLoss();
-                    setupToolBar(getString(R.string.title_notifications));
+                    setupToolBar(getString(R.string.live_auction));
 
                     //mTextMessage.setText(R.string.title_notifications);
                     return true;

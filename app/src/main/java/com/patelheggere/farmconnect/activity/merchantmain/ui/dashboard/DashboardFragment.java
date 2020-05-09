@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.database.DatabaseReference;
 import com.patelheggere.farmconnect.R;
 import com.patelheggere.farmconnect.activity.farmer.BiddingDetailsActivity;
-import com.patelheggere.farmconnect.activity.farmermain.ui.dashboard.adapter.FarmerCropAdapter;
+import com.patelheggere.farmconnect.activity.merchantmain.ui.dashboard.adapter.FarmerCropAdapter;
 import com.patelheggere.farmconnect.model.FarmerCropModel;
 import com.patelheggere.farmconnect.network.ApiInterface;
 import com.patelheggere.farmconnect.network.RetrofitInstance;

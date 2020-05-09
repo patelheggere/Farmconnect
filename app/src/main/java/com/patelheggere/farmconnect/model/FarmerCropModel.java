@@ -28,6 +28,8 @@ public class FarmerCropModel implements Parcelable {
     private String villageId;
     private String cropImageIcon;
     private long cropListId;
+    private int isMinimumOrder;
+    private long minimumOrder;
 
 
     public FarmerCropModel() {
@@ -76,6 +78,8 @@ public class FarmerCropModel implements Parcelable {
         endTime = in.readLong();
         cropImageIcon = in.readString();
         cropListId = in.readLong();
+        isMinimumOrder = in.readInt();
+        minimumOrder = in.readLong();
     }
 
     @Override
@@ -96,6 +100,8 @@ public class FarmerCropModel implements Parcelable {
         dest.writeLong(endTime);
         dest.writeString(cropImageIcon);
         dest.writeLong(cropListId);
+        dest.writeInt(isMinimumOrder);
+        dest.writeLong(minimumOrder);
     }
 
     @Override
@@ -317,5 +323,21 @@ public class FarmerCropModel implements Parcelable {
 
     public void setCropListId(long cropListId) {
         this.cropListId = cropListId;
+    }
+
+    public int getIsMinimumOrder() {
+        return isMinimumOrder;
+    }
+
+    public void setIsMinimumOrder(int isMinimumOrder) {
+        this.isMinimumOrder = isMinimumOrder;
+    }
+
+    public long getMinimumOrder() {
+        return minimumOrder;
+    }
+
+    public void setMinimumOrder(long minimumOrder) {
+        this.minimumOrder = minimumOrder;
     }
 }

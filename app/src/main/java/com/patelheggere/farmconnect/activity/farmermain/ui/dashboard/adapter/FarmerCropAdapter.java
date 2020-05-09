@@ -62,7 +62,7 @@ public class FarmerCropAdapter extends RecyclerView.Adapter<FarmerCropAdapter.My
         private ImageView imageView;
         private TextView bidSuccess;
         private ImageView circleImageViewProfile;
-        private LinearLayout mShareCommentLayout;
+        private LinearLayout mShareCommentLayout, mLinearLayoutBidderPrice;;
         private LinearLayout mLinearLayoutLike, mLinearLayoutComment, mLinearLayoutShare, mLinearLayoutPlace;
         private TextView mTextViewLikeCount, mTextViewShareCount, mTextViewCommentCount, textViewPlace;
 
@@ -89,6 +89,9 @@ public class FarmerCropAdapter extends RecyclerView.Adapter<FarmerCropAdapter.My
             mTextViewShareCount = view.findViewById(R.id.textViewShareCount);
             mTextViewCommentCount = view.findViewById(R.id.textViewCommentCount);
             mLinearLayoutPlace = view.findViewById(R.id.linearLayoutPlace);
+
+            mLinearLayoutBidderPrice = view.findViewById(R.id.bidderPriceLyt);
+            mLinearLayoutBidderPrice.setVisibility(View.VISIBLE);
         }
     }
     

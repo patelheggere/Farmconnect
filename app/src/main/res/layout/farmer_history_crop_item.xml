@@ -135,11 +135,13 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/bidderPriceLyt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:weightSum="4"
             android:visibility="gone">
             <TextView
+                android:id="@+id/textViewBidderPrice"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/bidder_price"
@@ -167,6 +169,7 @@
             android:layout_height="wrap_content"
             android:weightSum="4">
             <TextView
+                android:id="@+id/mTextViewFarmerPrice"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/your_price"

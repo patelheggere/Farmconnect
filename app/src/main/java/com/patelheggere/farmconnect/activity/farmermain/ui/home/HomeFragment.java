@@ -86,7 +86,9 @@ public class HomeFragment extends BaseFragment {
                         mRecyclerView.setVisibility(View.VISIBLE);
                         no_data.setVisibility(View.GONE);
                     } else {
+                        no_data.setVisibility(View.VISIBLE);
                         AppUtils.showToast(getString(R.string.no_data));
+
                     }
                 }
 

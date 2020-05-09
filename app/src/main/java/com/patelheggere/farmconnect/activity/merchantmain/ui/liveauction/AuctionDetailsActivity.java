@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -36,7 +37,8 @@ public class AuctionDetailsActivity extends BaseActivity {
     private Button mButtonBid;
     private ImageView mImageViewCrop;
     private PostBidModel mPostBidModel;
-    private EditText mEditTextMerchantBidValue;
+    private EditText mEditTextMerchantBidValue, mEditTextMinimumOrder;
+    private LinearLayout mLinearLayoutMinimuOrder;
 
     @Override
     protected int getContentView() {
@@ -52,6 +54,9 @@ public class AuctionDetailsActivity extends BaseActivity {
         textViewLocation = findViewById(R.id.location);
         mImageViewCrop = findViewById(R.id.crop_image);
         mEditTextMerchantBidValue = findViewById(R.id.merchant_bid_value);
+        mLinearLayoutMinimuOrder = findViewById(R.id.linearLayoutMinimuOrder);
+        mEditTextMinimumOrder = findViewById(R.id.MinimumOrder_Value);
+
     }
 
     @Override
@@ -65,6 +70,13 @@ public class AuctionDetailsActivity extends BaseActivity {
             textViewMinBid.setText(liveAuctionModel.getFarmerPrice());
             textViewLocation.setText(liveAuctionModel.getCropLocation());
             Glide.with(activity).load(liveAuctionModel.getCropImage()).into(mImageViewCrop);
+            if(liveAuctionModel.getIsMinimumOrder()==1){
+                mLinearLayoutMinimuOrder.setVisibility(View.VISIBLE);
+            }
+            else
+            {
+                mLinearLayoutMinimuOrder.setVisibility(View.GONE);
+            }
         }
 
     }
@@ -88,6 +100,14 @@ public class AuctionDetailsActivity extends BaseActivity {
                 {
                     AppUtils.showToast(getString(R.string.greater_than_farmer_price));
                     return;
+                }
+                if(liveAuctionModel.getIsMinimumOrder()==1)
+                {
+                    if(Long.parseLong(mEditTextMinimumOrder.getText().toString())<liveAuctionModel.getMinimumOrder())
+                    {
+                        AppUtils.showToast(getString(R.string.minimum_order_should_be_order));
+                        return;
+                    }
                 }
                 mPostBidModel.setBidderPrice(price+"");
                 mPostBidModel.setCropImage(liveAuctionModel.getCropImage());
