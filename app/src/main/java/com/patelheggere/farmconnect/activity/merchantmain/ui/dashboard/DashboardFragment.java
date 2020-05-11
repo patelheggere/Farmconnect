@@ -15,6 +15,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.firebase.database.DatabaseReference;
 import com.patelheggere.farmconnect.R;
@@ -46,6 +47,8 @@ public class DashboardFragment extends Fragment {
     private ProgressBar mProgressBar;
     private TextView no_data;
     private FarmerCropAdapter adapter;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -60,25 +63,41 @@ public class DashboardFragment extends Fragment {
             }
         });
         mRecyclerView = root.findViewById(R.id.recyclerView);
+        mSwipeRefreshLayout = root.findViewById(R.id.swipeLayout);
         mProgressBar = root.findViewById(R.id.progress_bar);
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         //linearLayoutManager.setStackFromEnd(true);
         mRecyclerView.setLayoutManager(linearLayoutManager);
         no_data = root.findViewById(R.id.no_data);
-        getData();
         initListener();
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getData();
+            }
+        });
+
+        mSwipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                mSwipeRefreshLayout.setRefreshing(true);
+                getData();
+            }
+        });
         return root;
     }
 
     private void getData() {
         cropModelsList = new ArrayList<>();
         setUpNetwork();
-        mProgressBar.setVisibility(View.VISIBLE);
+        //mProgressBar.setVisibility(View.VISIBLE);
         Call<List<FarmerCropModel>> cropData = apiInterface.getAllBiddedCrops(SharedPrefsHelper.getInstance().get(USER_ID).toString());
         cropData.enqueue(new Callback<List<FarmerCropModel>>() {
             @Override
             public void onResponse(Call<List<FarmerCropModel>> call, Response<List<FarmerCropModel>> response) {
                 mProgressBar.setVisibility(View.GONE);
+                mSwipeRefreshLayout.setRefreshing(false);
+
                 if(response.isSuccessful() && response.body().size()>0){
                     cropModelsList = (ArrayList<FarmerCropModel>) response.body();
                     Collections.reverse(cropModelsList);
@@ -96,6 +115,8 @@ public class DashboardFragment extends Fragment {
             @Override
             public void onFailure(Call<List<FarmerCropModel>> call, Throwable t) {
                 mProgressBar.setVisibility(View.GONE);
+                mSwipeRefreshLayout.setRefreshing(false);
+
                 // AppUtils.showToast(getString(R.string.something_wrong));
             }
         });

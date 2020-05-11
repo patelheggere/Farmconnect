@@ -49,11 +49,13 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.google.gson.Gson;
 import com.patelheggere.farmconnect.R;
+import com.patelheggere.farmconnect.activity.farmermain.MainActivity;
 import com.patelheggere.farmconnect.activity.languegae.LanguageActivity;
 import com.patelheggere.farmconnect.activity.merchantmain.ui.dashboard.DashboardFragment;
 import com.patelheggere.farmconnect.activity.merchantmain.ui.notifications.MerchantNotificationsFragment;
 import com.patelheggere.farmconnect.activity.merchantmain.ui.liveauction.LiveAuctionFragment;
 import com.patelheggere.farmconnect.model.APIResponseModel;
+import com.patelheggere.farmconnect.model.LoginModel;
 import com.patelheggere.farmconnect.model.notify.Data;
 import com.patelheggere.farmconnect.model.notify.Notification;
 import com.patelheggere.farmconnect.model.notify.SendNotificationModel;
@@ -86,11 +88,16 @@ import retrofit2.Response;
 
 import static com.patelheggere.farmconnect.utils.AppUtils.Constants.AVATAR;
 import static com.patelheggere.farmconnect.utils.AppUtils.Constants.EMAIL;
+import static com.patelheggere.farmconnect.utils.AppUtils.Constants.FIRST_TIME;
 import static com.patelheggere.farmconnect.utils.AppUtils.Constants.LANGUAGE;
+import static com.patelheggere.farmconnect.utils.AppUtils.Constants.LOGIN_TYPE;
 import static com.patelheggere.farmconnect.utils.AppUtils.Constants.MOBILE;
 import static com.patelheggere.farmconnect.utils.AppUtils.Constants.NAME;
+import static com.patelheggere.farmconnect.utils.AppUtils.Constants.PASSWORD;
+import static com.patelheggere.farmconnect.utils.AppUtils.Constants.USER_ID;
 import static com.patelheggere.farmconnect.utils.AppUtils.hasPermissions;
 import static com.patelheggere.farmconnect.utils.AppUtils.setLocale;
+import static com.patelheggere.farmconnect.utils.AppUtils.showToast;
 
 public class MerchantMainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private static final String TAG = "MainActivity";
@@ -381,6 +388,11 @@ public class MerchantMainActivity extends AppCompatActivity implements Navigatio
             SharedPrefsHelper.getInstance().clearAllData();
             startActivity(new Intent(MerchantMainActivity.this, LanguageActivity.class));
             finish();
+        }
+        else if(id==R.id.nav_mode)
+        {
+            setUpNetwork();
+            submitLoginDetails();
         }
         /*
         else if (id == R.id.nav_events) {
@@ -1094,7 +1106,45 @@ public class MerchantMainActivity extends AppCompatActivity implements Navigatio
         }
         return null;
     }
+    private void submitLoginDetails() {
 
+        LoginModel loginModel = new LoginModel();
+        loginModel.setPhone(SharedPrefsHelper.getInstance().get(MOBILE).toString());
+        if(SharedPrefsHelper.getInstance().get(PASSWORD)!=null)
+        {
+            loginModel.setPwd(SharedPrefsHelper.getInstance().get(PASSWORD).toString());
+        }
+        Call<APIResponseModel> userVerifyCall = apiInterface.verifyUser(loginModel.getPhone(), loginModel.getPwd(), ""+1);
+        userVerifyCall.enqueue(new Callback<APIResponseModel>() {
+            @Override
+            public void onResponse(Call<APIResponseModel> call, Response<APIResponseModel> response) {
+                // mProgressBar.setVisibility(View.GONE);
+                if(response.isSuccessful() && response.body().isStatus())
+                {
+                    SharedPrefsHelper.getInstance().save(LOGIN_TYPE, true);
+                    SharedPrefsHelper.getInstance().save(FIRST_TIME, false);
+                    SharedPrefsHelper.getInstance().save(NAME,response.body().getName());
+                    SharedPrefsHelper.getInstance().save(MOBILE, response.body().getPhone());
+                    SharedPrefsHelper.getInstance().save(EMAIL, response.body().getEmail());
+                    SharedPrefsHelper.getInstance().save(AVATAR, response.body().getImageURL());
+                    SharedPrefsHelper.getInstance().save(USER_ID, response.body().getId());
+                    startActivity(new Intent(MerchantMainActivity.this, MainActivity.class));
+                    finish();
+                    //startMainActivity();
+                }else{
+                    // mButtonLoginSubmit.setEnabled(true);
+                    // mButtonLoginSubmit.setClickable(true);
+                    showToast(getString(R.string.invalid));
+                }
+            }
 
+            @Override
+            public void onFailure(Call<APIResponseModel> call, Throwable t) {
+                // mProgressBar.setVisibility(View.GONE);
+
+                showToast(getString(R.string.something_wrong));
+            }
+        });
+    }
 
 }

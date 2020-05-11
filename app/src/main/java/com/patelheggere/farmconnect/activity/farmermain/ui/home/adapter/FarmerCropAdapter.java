@@ -5,6 +5,8 @@ import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -108,7 +110,7 @@ public class FarmerCropAdapter extends RecyclerView.Adapter<FarmerCropAdapter.My
 
             holder.cropName.setText(dataModel.getCropName());
             holder.bidsCount.setText(""+dataModel.getNoOfBids());
-            holder.qty.setText(""+dataModel.getQty());
+            holder.qty.setText(""+dataModel.getQty()+" Quintol(s)");
             if(dataModel.getCropImage()!=null)
             {
                 Glide.with(context).load(dataModel.getCropImage()).into(holder.imageView);
@@ -128,6 +130,9 @@ public class FarmerCropAdapter extends RecyclerView.Adapter<FarmerCropAdapter.My
             {
                 Glide.with(context).load(dataModel.getCropImageIcon()).into(holder.circleImageViewProfile);
             }
+            Animation animBlink;
+            animBlink = AnimationUtils.loadAnimation(context, R.anim.blink);
+            holder.status.startAnimation(animBlink);
 
             /*
             holder.content.setText(dataModel.getMessage());

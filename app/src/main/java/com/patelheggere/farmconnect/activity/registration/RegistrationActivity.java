@@ -97,6 +97,7 @@ import static com.patelheggere.farmconnect.utils.AppUtils.Constants.FIRST_TIME;
 import static com.patelheggere.farmconnect.utils.AppUtils.Constants.LOGIN_TYPE;
 import static com.patelheggere.farmconnect.utils.AppUtils.Constants.MOBILE;
 import static com.patelheggere.farmconnect.utils.AppUtils.Constants.NAME;
+import static com.patelheggere.farmconnect.utils.AppUtils.Constants.PASSWORD;
 import static com.patelheggere.farmconnect.utils.AppUtils.Constants.USER_ID;
 
 public class RegistrationActivity extends BaseActivity {
@@ -472,6 +473,7 @@ public class RegistrationActivity extends BaseActivity {
                     SharedPrefsHelper.getInstance().save(EMAIL, response.body().getEmail());
                     SharedPrefsHelper.getInstance().save(AVATAR, response.body().getImageURL());
                     SharedPrefsHelper.getInstance().save(USER_ID, response.body().getId());
+                    SharedPrefsHelper.getInstance().save(PASSWORD, textInputEditTextPwdLogin.getText().toString());
                     startMainActivity();
                 }else{
                     mButtonLoginSubmit.setEnabled(true);

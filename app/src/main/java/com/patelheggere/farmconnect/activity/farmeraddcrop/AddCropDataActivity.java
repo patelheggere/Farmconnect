@@ -36,8 +36,15 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.net.PlacesClient;
+import com.google.android.libraries.places.widget.Autocomplete;
+import com.google.android.libraries.places.widget.AutocompleteActivity;
+import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
@@ -70,6 +77,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
@@ -192,6 +200,13 @@ public class AddCropDataActivity extends BaseActivity {
                 submitDetails();
             }
         });
+
+       /* inputEditTextCropLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getCurrentLocation();
+            }
+        });*/
 
         inputEditTextHarvestTime.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -444,7 +459,9 @@ public class AddCropDataActivity extends BaseActivity {
         farmerCropModel.setDistrictId(distId);
         farmerCropModel.setTalukId(talukId);
         farmerCropModel.setVillageId(villageId);
-        farmerCropModel.setMinimumOrder(Long.parseLong(inputEditTextMinimumOrder.getText().toString()));
+        if(isMinimumOrder==1) {
+            farmerCropModel.setMinimumOrder(Long.parseLong(inputEditTextMinimumOrder.getText().toString()));
+        }
 
 
         Call<APIResponseModel> cropModelCall = apiInterface.addCropDetails(farmerCropModel);
@@ -898,7 +915,20 @@ public class AddCropDataActivity extends BaseActivity {
     private FirebaseStorage storage;
     private StorageReference storageReference;
     private Uri filePath;
+    int AUTOCOMPLETE_REQUEST_CODE = 1111;
 
+
+    private void getCurrentLocation(){
+        Places.initialize(getApplicationContext(), "AIzaSyCxgGtTERR8pbbIj4vMMqqy89FJIeFJUds");
+
+        // Create a new Places client instance.
+        PlacesClient placesClient = Places.createClient(this);
+        List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME);
+// Start the autocomplete intent.
+        Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields).build(this);
+        startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE);
+
+    }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -906,7 +936,18 @@ public class AddCropDataActivity extends BaseActivity {
             filePath = data.getData();
         // imageViewUploaded.setImageURI(filePath);
         // imageViewUploaded.setVisibility(View.VISIBLE);
-
+        if (requestCode == AUTOCOMPLETE_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                Place place = Autocomplete.getPlaceFromIntent(data);
+                Log.i(TAG, "Place: " + place.getName() + ", " + place.getId());
+            } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
+                // TODO: Handle the error.
+                Status status = Autocomplete.getStatusFromIntent(data);
+                Log.i(TAG, status.getStatusMessage());
+            } else if (resultCode == RESULT_CANCELED) {
+                // The user canceled the operation.
+            }
+        }
         if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
                 && data != null && data.getData() != null )
         {

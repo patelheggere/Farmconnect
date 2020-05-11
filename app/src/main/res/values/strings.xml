@@ -151,14 +151,14 @@
     <string name="top_bid">Highest Bid:</string>
     <string name="bid_now">bid now</string>
     <string name="expiry_time">Expiry Time:</string>
-    <string name="minbid">Minimum Bid:</string>
+    <string name="minbid">Minimum Bid per Quintal:</string>
     <string name="current_bid">Current Bid:</string>
     <string name="location">Crop Location:</string>
     <string name="live_auction">Live Auction</string>
     <string name="crop_name">Crop Name</string>
-    <string name="quantity">Quantity</string>
-    <string name="min_quantity">Minimum Quantity</string>
-    <string name="harvesting_date">Estimated Harvesting Date</string>
+    <string name="quantity">Quantity in Quintal</string>
+    <string name="min_quantity">Minimum Quantity in Quintal</string>
+    <string name="harvesting_date">Estimated Harvesting Date(dd/mm/yyyy)</string>
     <string name="bid_success">Bid Success</string>
     <string name="dist_cnt_emty">Please select district</string>
     <string name="taluk_cnt_emty">Please select Taluk</string>
@@ -193,5 +193,7 @@
     <string name="_no_crops_in_live_auction">No crops available for Live Auction please wait we will get you soon.</string>
     <string name="minimum_order">Minimum Order</string>
     <string name="minimum_order_should_be_order">Minimum Order should be ordered</string>
+    <string name="login_as_merchant">Login as merchant</string>
+    <string name="login_as_farmer">Login as farmer</string>
 
 </resources>

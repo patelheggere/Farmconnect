@@ -117,7 +117,7 @@ public class FarmerCropAdapter extends RecyclerView.Adapter<FarmerCropAdapter.My
 
             holder.cropName.setText(dataModel.getCropName());
             holder.bidsCount.setText(""+dataModel.getNoOfBids());
-            holder.qty.setText(""+dataModel.getQty());
+            holder.qty.setText(""+dataModel.getQty()+" Quintol(s)");
             if(dataModel.getCropImage()!=null)
             {
                 Glide.with(context).load(dataModel.getCropImage()).into(holder.imageView);

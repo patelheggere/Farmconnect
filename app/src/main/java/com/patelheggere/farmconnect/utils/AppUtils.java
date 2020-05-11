@@ -254,6 +254,7 @@ public class AppUtils {
         public static final String DESIRED_JOB = "desiredJob";
         public static final String LOGIN_TYPE = "logintype";
         public static final String CROP_LIST = "cropList";
+        public static final String PASSWORD = "password";
 
         public static final String API_KEY_ID ="rzp_test_t6eDUw8dTo8SOL";
         public static final String API_SECRET_KEY ="eIK7z1Csr3Va6OPXQizSrzhv";

@@ -208,7 +208,7 @@
                 android:linksClickable="true"
                 android:layout_weight="2.5"
                 tools:text="status"
-                android:textColor="@color/black"
+                android:textColor="@color/colorAccent"
                 android:visibility="visible"
                 android:autoLink="web"
                 android:textColorLink="@color/link" />
@@ -242,7 +242,7 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:background="@color/white"
-            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
             android:visibility="visible" />
         <LinearLayout
             android:layout_width="match_parent"

@@ -20,6 +20,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.firebase.database.DatabaseReference;
 import com.patelheggere.farmconnect.R;
@@ -82,6 +83,7 @@ public class LiveAuctionFragment extends BaseFragment implements
     ArrayList<FilterCheckBoxModel> cropFilterList = new ArrayList<>();
     ArrayList<FilterCheckBoxModel> distFilterList = new ArrayList<>();
     private Button mButtonSearch;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -90,7 +92,7 @@ public class LiveAuctionFragment extends BaseFragment implements
          setUpNetwork();
          initViews();
          initListeners();
-         getData(filterModel);
+         //getData(filterModel);
         return mRootView;
     }
 
@@ -105,6 +107,21 @@ public class LiveAuctionFragment extends BaseFragment implements
         mDistSpinner = mRootView.findViewById(R.id.spinnerDist);
         mButtonSearch = mRootView.findViewById(R.id.search);
         no_data = mRootView.findViewById(R.id.no_data);
+        mSwipeRefreshLayout = mRootView.findViewById(R.id.swipeLayout);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getData(filterModel);
+            }
+        });
+
+        mSwipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                mSwipeRefreshLayout.setRefreshing(true);
+                getData(filterModel);
+            }
+        });
     }
 
     String[] stateList = {
@@ -200,7 +217,7 @@ public class LiveAuctionFragment extends BaseFragment implements
     private FilterModel filterModel = new FilterModel();
     private void getData(FilterModel filterModel) {
         liveAuctionModels = new ArrayList<>();
-        mProgressBar.setVisibility(View.VISIBLE);
+       // mProgressBar.setVisibility(View.VISIBLE);
         mRecyclerView.setVisibility(View.GONE);
         Call<List<FarmerCropModel>> cropData;
         if(filterModel.getState()!=null || filterModel.getDistrict()!=null || filterModel.getCropName()!=null) {
@@ -213,6 +230,7 @@ public class LiveAuctionFragment extends BaseFragment implements
             @Override
             public void onResponse(Call<List<FarmerCropModel>> call, Response<List<FarmerCropModel>> response) {
                 mProgressBar.setVisibility(View.GONE);
+                mSwipeRefreshLayout.setRefreshing(false);
                 if(response.isSuccessful() && response.body().size()>0){
                    /*// cropModelsList = (ArrayList<FarmerCropModel>) response.body();
                    // Collections.reverse(cropModelsList);
@@ -238,6 +256,7 @@ public class LiveAuctionFragment extends BaseFragment implements
             @Override
             public void onFailure(Call<List<FarmerCropModel>> call, Throwable t) {
                 mProgressBar.setVisibility(View.GONE);
+                mSwipeRefreshLayout.setRefreshing(false);
                 // AppUtils.showToast(getString(R.string.something_wrong));
             }
         });
