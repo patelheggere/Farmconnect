@@ -2,6 +2,7 @@ package com.patelheggere.farmconnect.activity.merchantmain.ui.liveauction.adapte
 
 import android.content.Context;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.patelheggere.farmconnect.R;
 import com.patelheggere.farmconnect.model.FarmerCropModel;
 
@@ -104,6 +106,7 @@ public class LiveAuctionAdapter extends RecyclerView.Adapter<LiveAuctionAdapter.
 
             if(dataModel.getCropImage()!=null)
             {
+                Log.d(TAG, "onBindViewHolder: "+dataModel.getCropImageIcon());
                 Glide.with(context).load(dataModel.getCropImage()).into(holder.imageView);
             }
             Animation animBlink;

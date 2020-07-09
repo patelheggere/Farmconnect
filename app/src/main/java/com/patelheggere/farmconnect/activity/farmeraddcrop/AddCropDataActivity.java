@@ -57,6 +57,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.patelheggere.farmconnect.FarmConnectApplication;
 import com.patelheggere.farmconnect.R;
+import com.patelheggere.farmconnect.activity.merchantmain.MapActivity;
 import com.patelheggere.farmconnect.activity.registration.RegistrationActivity;
 import com.patelheggere.farmconnect.base.BaseActivity;
 import com.patelheggere.farmconnect.model.APIResponseModel;
@@ -93,6 +94,7 @@ import static com.patelheggere.farmconnect.utils.AppUtils.Constants.USER_ID;
 public class AddCropDataActivity extends BaseActivity {
     private static final String TAG = "AddCropDataActivity";
     private Button submit, cancel, upload, takePhoto;
+    private double latitude, longitude;
 
     private String[] PERMISSIONS = {
             android.Manifest.permission.CAMERA,
@@ -140,6 +142,7 @@ public class AddCropDataActivity extends BaseActivity {
     private RadioGroup mRadioGroupMinimumOrder;
     protected RadioButton mRadioButtonMinimumYes, mRadioButtonMinimumNo;
     private int isMinimumOrder=0;
+    private ImageView mImageViewLocationIcon;
 
     @Override
     protected int getContentView() {
@@ -151,6 +154,7 @@ public class AddCropDataActivity extends BaseActivity {
         upload = findViewById(R.id.btnUploadPhoto);
         takePhoto = findViewById(R.id.btnPhoto);
         circleImageView = findViewById(R.id.photo);
+        mImageViewLocationIcon = findViewById(R.id.locationIcon);
         submit = findViewById(R.id.btnSubmit);
         inputEditTextHarvestTime = findViewById(R.id.et_harvesting_date);
         inputEditTextQuantity = findViewById(R.id.et_quantity);
@@ -201,12 +205,19 @@ public class AddCropDataActivity extends BaseActivity {
             }
         });
 
-       /* inputEditTextCropLocation.setOnClickListener(new View.OnClickListener() {
+        inputEditTextCropLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getCurrentLocation();
+
             }
-        });*/
+        });
+
+        mImageViewLocationIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startMapActivity();
+            }
+        });
 
         inputEditTextHarvestTime.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -918,6 +929,10 @@ public class AddCropDataActivity extends BaseActivity {
     int AUTOCOMPLETE_REQUEST_CODE = 1111;
 
 
+    private void startMapActivity()
+    {
+        startActivityForResult(new Intent(AddCropDataActivity.this, MapActivity.class), 1001);
+    }
     private void getCurrentLocation(){
         Places.initialize(getApplicationContext(), "AIzaSyCxgGtTERR8pbbIj4vMMqqy89FJIeFJUds");
 
@@ -934,6 +949,16 @@ public class AddCropDataActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(data!=null)
             filePath = data.getData();
+
+        if(resultCode==RESULT_OK)
+        {
+            if(1001==requestCode)
+            {
+                inputEditTextCropLocation.setText(data.getStringExtra("ADDS"));
+                latitude = data.getDoubleExtra("LAT", 0.0);
+                longitude = data.getDoubleExtra("LON", 0.0);
+            }
+        }
         // imageViewUploaded.setImageURI(filePath);
         // imageViewUploaded.setVisibility(View.VISIBLE);
         if (requestCode == AUTOCOMPLETE_REQUEST_CODE) {

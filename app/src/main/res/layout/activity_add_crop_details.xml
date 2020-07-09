@@ -133,12 +133,12 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_location"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/locationIcon"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/til_village">
 
@@ -151,6 +151,14 @@
                 android:inputType="textCapWords"
                 android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
+        <ImageView
+            android:id="@+id/locationIcon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="25dp"
+            android:src="@drawable/ic_location"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/til_village"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_harvesting_date"
